@@ -8,6 +8,8 @@ import (
 	"errors"
 	"fmt"
 	"image"
+	_ "image/gif"
+	_ "image/jpeg"
 	"image/png"
 	"io"
 	"mime/multipart"
@@ -1494,7 +1496,7 @@ func convertToWebP(imageDataURL string, transparentColor string) ([]byte, error)
 
 	if mime.Is("image/webp") {
 		return data, nil
-	} else if mime.Is("video/mp4") {
+	} else if mime.Is("video/mp4") || mime.Is("image/gif") {
 		return convertVideoToWebP(data, transparentColor)
 	} else if mime.Is("image/jpeg") || mime.Is("image/png") || mime.Is("image/jpg") {
 		img, _, err := image.Decode(bytes.NewReader(data))
